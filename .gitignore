@@ -1,0 +1,28 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints
+
+# Trained model files
+*.h5
+*.pkl
+*.pt
+*.ckpt
+
+# Environment files
+.env
+*.env
+
+# Sensitive or non-shareable files (e.g., data and images)
+datasets/
+input_image/
+model/
+preprocess_image/
+back_remove_image/
+
+# IDE and editor settings
+.vscode/
+.idea/
+
+# Streamlit cache and config
+.streamlit/
