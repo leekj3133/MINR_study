@@ -69,7 +69,6 @@ def survival(df, file, model):
     img = preprocess.Min_Max_Normalization(img)
     img = cv2.medianBlur(img,5)
     img = preprocess.Histogram_Equalization_CLAHE_Color(img, limit=2,kernel_size=7)
-    cv2.imwrite("./preprocess_image/"+file.name, cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
     preprocess_image = "./preprocess_image/"+file.name
     try:
         # Step 3: Load pre-fitted scaler and expected input column structure
