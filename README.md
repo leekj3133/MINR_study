@@ -3,11 +3,11 @@
 
 ## Description:
 
-This repository contains frontend UI code and utility modules for a bladder cancer recurrence prediction model.
-The code supports user input, preprocessing, and integration with a deep learning survival model.
+This repository contains the frontend UI code and utility modules for a bladder cancer recurrence prediction model.  
+It supports user input, preprocessing, and integration with a deep learning–based survival prediction model.
 
-⚠️ Due to internal restrictions, the actual trained model and execution pipeline are **not available** in this repository.
-This version is for code structure review or documentation purposes only.
+⚠️ Due to internal restrictions, the trained model weights and execution pipeline are not included in this repository.  
+This version is intended for code structure review and documentation purposes only.
 
 ## Files:
 
