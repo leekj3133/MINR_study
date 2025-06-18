@@ -14,10 +14,10 @@ This version is intended for code structure review and documentation purposes on
 - home.py            : Streamlit-based UI logic
 - preprocess.py      : Image preprocessing functions
 - util.py            : General utility functions
-- requirements.txt   : Python dependencies (used in original environment)
+- requirements.txt   : Python package dependencies (original environment)
 - LICENSE            : Project license
-- README.md          : Markdown version with full docs
-- .gitignore         : Git exclusion config
+- README.md          : Markdown version with full documentation
+- .gitignore         : Git exclusion configuration
 
 ## Author:
 
@@ -29,9 +29,10 @@ GitHub: https://github.com/leekj3133/MIBR_study
 The recurrence prediction model developed in this study was implemented in **Python 3.10** using **TensorFlow 2.14** and the **Keras API**.
 
 - **Web Demonstration**  
-  A live demonstration of the recurrence prediction model is accessible at  
-  👉 [https://bladder-cancer-recur.streamlit.app/](https://bladder-cancer-recur.streamlit.app/)  
-  The application allows users to interactively test the model using example input data without requiring any setup.  
+  A live demonstration of the recurrence prediction model is accessible at:  
+  👉 https://bladder-cancer-recur.streamlit.app/
+  
+  This web application allows users to interactively test the model using example input data, without requiring local setup.  
   If you're interested in collaboration or would like to explore the model further, please contact the author.
   
 - **Source Code (Web Interface & Sample Inference)**  
