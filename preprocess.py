@@ -9,12 +9,9 @@ def background_remove(file, image_array):
     k = cv2.getStructuringElement(cv2.MORPH_RECT, (31,31))
     imgthres = cv2.dilate(imthres,k)
     cnts, _ = cv2.findContours(imthres, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-    try:
-        x,y,w,h = cv2.boundingRect(cnts[-1])
-        cv2.drawContours(img1, cnts, -1, (255, 0, 0 ), 4)
-        cv2.imwrite("./back_remove_image/"+file.name, cv2.cvtColor(image_array[y:y+h, x:x+w][:,:,], cv2.COLOR_RGB2BGR))
-    except:
-        cv2.imwrite("./back_remove_image/"+file.name, cv2.cvtColor(image_array[:,:,], cv2.COLOR_RGB2BGR))
+    x,y,w,h = cv2.boundingRect(cnts[-1])
+    cv2.drawContours(img1, cnts, -1, (255, 0, 0 ), 4)
+
     return image_array
 
 
