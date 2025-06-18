@@ -22,7 +22,7 @@ This version is for code structure review or documentation purposes only.
 ## Author:
 
 Developer: leekj3133
-GitHub: https://github.com/leekj3133/[your-repo-name]
+GitHub: https://github.com/leekj3133/MIBR_study
 
 ## Code and Data Availability
 
