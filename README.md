@@ -19,11 +19,6 @@ This version is for code structure review or documentation purposes only.
 - README.md          : Markdown version with full docs
 - .gitignore         : Git exclusion config
 
-## Note:
-
-This code is **not runnable out of the box**, as it lacks the trained model file and may rely on confidential preprocessing logic or internal APIs.
-Please contact the author if you're looking for collaboration or demonstration.
-
 ## Author:
 
 Developer: leekj3133
@@ -37,7 +32,9 @@ The recurrence prediction model developed in this study was implemented in **Pyt
   A live demonstration of the recurrence prediction model is accessible at  
   👉 [https://bladder-cancer-recur.streamlit.app/](https://bladder-cancer-recur.streamlit.app/)  
   The application allows users to interactively test the model using example input data.
-
+  This code is not runnable out of the box, as it lacks the trained model file and may rely on confidential preprocessing logic or internal APIs.  
+  Please contact the author if you're looking for collaboration or demonstration.
+  
 - **Source Code (Web Interface & Sample Inference)**  
   The source code for the web-based interface and sample inference scripts is publicly available on GitHub:  
   👉 [https://github.com/leekj3133/MIBR_study](https://github.com/leekj3133/MIBR_study)
