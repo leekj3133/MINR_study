@@ -2,7 +2,7 @@
 
 
 ## Description:
-------------
+
 This repository contains frontend UI code and utility modules for a bladder cancer recurrence prediction model.
 The code supports user input, preprocessing, and integration with a deep learning survival model.
 
@@ -10,7 +10,7 @@ The code supports user input, preprocessing, and integration with a deep learnin
 This version is for code structure review or documentation purposes only.
 
 ## Files:
-------
+
 - home.py            : Streamlit-based UI logic
 - preprocess.py      : Image preprocessing functions
 - util.py            : General utility functions
@@ -20,12 +20,12 @@ This version is for code structure review or documentation purposes only.
 - .gitignore         : Git exclusion config
 
 ## Note:
------
+
 This code is **not runnable out of the box**, as it lacks the trained model file and may rely on confidential preprocessing logic or internal APIs.
 Please contact the author if you're looking for collaboration or demonstration.
 
 ## Author:
--------
+
 Developer: leekj3133
 GitHub: https://github.com/leekj3133/[your-repo-name]
 
