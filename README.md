@@ -36,14 +36,17 @@ The recurrence prediction model developed in this study was implemented in **Pyt
   If you're interested in collaboration or would like to explore the model further, please contact the author.
   
 - **Source Code (Web Interface & Sample Inference)**  
-  The source code for the web-based interface and sample inference scripts is publicly available on GitHub:  
+  The source code for the web-based interface and sample inference logic is publicly available on GitHub:  
   👉 [https://github.com/leekj3133/MIBR_study](https://github.com/leekj3133/MIBR_study)
 
 - **Model Weights & Training Code**  
-  The full model training code, model weights, and backend modules are **not publicly available** due to institutional and legal restrictions on clinical data from South Korea. These materials may be shared upon reasonable request to the corresponding author and subject to institutional review board (IRB) approval, if applicable.
+  The full training pipeline, model weights, and backend modules are not publicly released due to institutional and legal restrictions  
+on clinical data originating from South Korea. These materials may be shared upon reasonable request and subject to approval  
+by the corresponding institutional review board (IRB), if applicable.
 
 - **Data Availability**  
-  The clinical and imaging datasets used in this study include sensitive patient information and cannot be publicly released.  
-  However, a **simulated example dataset** (not derived from real patient data) is provided in the GitHub repository to demonstrate the input format and support reproducibility of the web application.
+  The clinical and imaging datasets used in this study contain sensitive patient information and cannot be publicly disclosed.  
+However, a synthetic example dataset (not derived from real patient data) is included in the repository to demonstrate input format  
+and support reproducibility of the web interface.
 
-This setup enables transparency while respecting data privacy regulations.
+This setup ensures transparency while upholding data privacy and ethical research standards.
