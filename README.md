@@ -1,6 +1,5 @@
-------------
-# Bladder Cancer AI Tool (DEMO)
-------------
+# NMIBC AI Tool (DEMO)
+
 
 ## Description:
 ------------
