@@ -31,7 +31,6 @@ The recurrence prediction model developed in this study was implemented in **Pyt
 - **Web Demonstration**  
   A live demonstration of the recurrence prediction model is accessible at  
   👉 [https://bladder-cancer-recur.streamlit.app/](https://bladder-cancer-recur.streamlit.app/)  
-  The application allows users to interactively test the model using example input data.
   The application allows users to interactively test the model using example input data without requiring any setup.  
   If you're interested in collaboration or would like to explore the model further, please contact the author.
   
