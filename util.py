@@ -74,6 +74,7 @@ def survival(df, file, model):
     # Convert to RGB and uint8 before encoding
     img_back_removed_rgb = cv2.cvtColor(image_back_removed, cv2.COLOR_RGB2BGR)
     img_preprocessed_rgb = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    
     # Encode images to PNG in memory
     _, back_buf = cv2.imencode('.png', img_back_removed_rgb)
     _, pre_buf = cv2.imencode('.png', img_preprocessed_rgb)
