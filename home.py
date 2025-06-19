@@ -453,19 +453,11 @@ elif st.session_state.page == 'result':
     
     survival_model = st.session_state.survival_model
 
+    summary_lines, fig, back_image_bytes, pre_image_bytes = survival(csv_data, file_image, survival_model)
+
+    st.session_state.back_image_bytes = back_image_bytes
+    st.session_state.pre_image_bytes = pre_image_bytes
     
-    
-    summary_lines, fig, back_remove_image, preprocess_image = survival(csv_data, file_image, survival_model)
-
-
-    if 'back_image_bytes' not in st.session_state:
-        with open(back_remove_image, "rb") as f:
-            st.session_state.back_image_bytes = f.read()
-
-    if 'pre_image_bytes' not in st.session_state:
-        with open(preprocess_image, "rb") as f:
-            st.session_state.pre_image_bytes = f.read()
-
     with st.sidebar:
         st.write("")
         st.subheader("📁 Download Processed Images")
@@ -474,7 +466,7 @@ elif st.session_state.page == 'result':
         st.download_button(
             label="Download",
             data=io.BytesIO(st.session_state.back_image_bytes),
-            file_name=os.path.basename(back_remove_image),
+            file_name="background_removed.png",
             mime="image/png",
             key="download_back_img"
         )
@@ -483,7 +475,7 @@ elif st.session_state.page == 'result':
         st.download_button(
             label="Download",
             data=io.BytesIO(st.session_state.pre_image_bytes),
-            file_name=os.path.basename(preprocess_image),
+            file_name="preprocessed.png",
             mime="image/png",
             key="download_preprocessed_image"
         )
