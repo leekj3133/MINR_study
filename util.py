@@ -59,17 +59,25 @@ def survival(df, file, model):
     # Step 1: Load image and save original version
     image = Image.open(file).convert("RGB")
     image_array = np.asarray(image)
-    cv2.imwrite("./input_image/"+file.name, cv2.cvtColor(image_array, cv2.COLOR_RGB2BGR))
-    back_remove_image = "./input_image/"+file.name
-    image = preprocess.background_remove(file, image_array)
 
+    # Background removal
+    image = preprocess.background_remove(file, image_array)
+    image_back_removed = image
+    
     # Step 2: Apply preprocessing pipeline
     img = preprocess.zero_padding(image)
     img = cv2.resize(img, (512, 512))
     img = preprocess.Min_Max_Normalization(img)
     img = cv2.medianBlur(img,5)
     img = preprocess.Histogram_Equalization_CLAHE_Color(img, limit=2,kernel_size=7)
-    preprocess_image = "./preprocess_image/"+file.name
+
+    # Convert to RGB and uint8 before encoding
+    img_back_removed_rgb = cv2.cvtColor(image_back_removed, cv2.COLOR_RGB2BGR)
+    img_preprocessed_rgb = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    # Encode images to PNG in memory
+    _, back_buf = cv2.imencode('.png', img_back_removed_rgb)
+    _, pre_buf = cv2.imencode('.png', img_preprocessed_rgb)
+    
     try:
         # Step 3: Load pre-fitted scaler and expected input column structure
         # NOTE: This file was generated during training and only includes scaler & column metadata (no patient data)
@@ -196,7 +204,7 @@ def survival(df, file, model):
         f"<h4>🧬 Predicted Risk Group: <b>{risk_group_name}</b></h4>",
         f"</div>"
     ]
-    return summary_lines, fig, back_remove_image, preprocess_image
+    return summary_lines, fig,  back_buf.tobytes(), pre_buf.tobytes()
 
 
     
