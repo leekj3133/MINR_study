@@ -62,51 +62,30 @@ def weibull_nll(y_true, y_pred):
 
 st.set_page_config(layout="wide")
 
-
+# Initialize page state
 def initialize_session():
     defaults = {
         'page': 'input',
         'csv_data': None,
-        'file_image': None
+        'file_image': None,
+        'input_saved': False,
+        'csv_path': None,
+        'empty_df': pd.read_csv("./datasets/bladder_example.csv", index_col=0),
+        'input_data': {},
+        'page_index': 0,
+        'nav_clicked': False,
+        'target_page': 0
     }
-    for key, value in defaults.items():
+    # 'csv' 같은 쓰이지 않는 키는 생략해도 됩니다
+    for key, default in defaults.items():
         if key not in st.session_state:
-            st.session_state[key] = value
+            st.session_state[key] = default
 
 initialize_session()
 
-
-if 'page' not in st.session_state:
-    st.session_state.page = 'input'
-if 'file_image' not in st.session_state:
-    st.session_state.file_image = None
-if 'csv_data' not in st.session_state:
-    st.session_state.csv_data = None
-if 'input_saved' not in st.session_state:
-    st.session_state.input_saved = False
-
 # --------------------------- Page: Input ---------------------------
 if st.session_state.page == 'input':
-    
-    if 'csv_data' not in st.session_state:
-            st.session_state.csv_data = None
-    
-    if 'empty_df' not in st.session_state:
-        st.session_state.empty_df = pd.read_csv("./datasets/bladder_example.csv", index_col=0)
-    if "csv" not in st.session_state:
-                st.session_state.csv = pd.DataFrame() 
-
-
-    if "input_data" not in st.session_state:
-        st.session_state.input_data = {}
-    if "page_index" not in st.session_state:
-        st.session_state.page_index = 0
-    if "nav_clicked" not in st.session_state:
-        st.session_state.nav_clicked = False
-    if "target_page" not in st.session_state:
-        st.session_state.target_page = 0
     st.title('🩺 Bladder Cancer Recur')
-
     st.write("")
     st.write("")
 
@@ -134,19 +113,19 @@ if st.session_state.page == 'input':
         with image:
             st.write("### 📤 Upload the image file")
             file_image = st.file_uploader('',type=['jpeg','jpg','png'])
-            if file_image is not None:
-                try:
-                    image = Image.open(file_image).convert("RGB")
-                    image.verify()  
-                    st.image(image, use_container_width =True)
-                    st.session_state.file_image = file_image  
-                except Exception:
-                    st.error("❌ Invalid or corrupted image file. Please re-upload.")
             st.write("❌ Please avoid images with cystoscopy lines.")
             st.write("✂️ please crop the letters in your image")
             example_image_path = "./datasets/example_image.png"
             example_image = Image.open(example_image_path).convert("RGB")
             st.image(example_image, use_container_width =True)
+            if file_image is not None:
+                try:
+                    image = Image.open(file_image).convert("RGB")
+                    image.verify() 
+                    st.session_state.file_image = file_image  
+                except Exception:
+                    st.error("❌ Invalid or corrupted image file. Please re-upload.")
+            
             st.write("")
             st.write("")
             st.write("")
@@ -157,6 +136,7 @@ if st.session_state.page == 'input':
             st.write("")
             st.write("")
             csv = None
+            csv_path = None
             vertical_alignment = st.selectbox("✅ Select Option", ["Upload File", "Enter Text"], index=1)
             if vertical_alignment == "Upload File":
                 file_csv = st.file_uploader('',type=["csv", "xlsx", "xls"])
@@ -167,8 +147,11 @@ if st.session_state.page == 'input':
                     try:
                         selected_data = file_csv
                         st.session_state.csv_data = selected_data
+                        file_csv.seek(0)
+                        st.session_state.ori_df = pd.read_csv(file_csv, index_col=0)
                         st.session_state.input_saved = True
                         st.success("✅ File uploaded successfully.")
+                        st.session_state.csv_path = file_csv
                         st.write("")
                         st.write("")
                         st.write("")
@@ -180,6 +163,7 @@ if st.session_state.page == 'input':
                 st.warning("🛠 Text input form to be implemented here.")
                 
             
+                # Define form fields: {field name: (input type, is required)}
                 history_items = {
                     "Age": ("number", True),
                     "Sex": ("select", True),
@@ -190,7 +174,7 @@ if st.session_state.page == 'input':
                     "Diabetes": ("select", False),
                     "Dyslipidemia": ("select", False),
                     "Previous surgical history": ("select", False),
-                    "past TUR-BT":("select", True),    
+                    "past TUR-BT":("select", True),     
                 }
                 pre_op_lab_items = {                
                     "Pre-op TP (Total Potention)": ("number", False),
@@ -265,6 +249,7 @@ if st.session_state.page == 'input':
                         ]:
                     all_items.update(d)
 
+                # Divide fields into pages (7 per page)
                 pages_data = [
                     list(history_items.keys()),        # Page 1: Patient history
                     list(pre_op_lab_items.keys()),     # Page 2: Pre-op labs
@@ -315,12 +300,13 @@ if st.session_state.page == 'input':
                 
                 st.text("")
                 total_pages = len(pages_data)
-
+                
+                # Reset page index if it exceeds valid range
                 if "page_index" not in st.session_state or st.session_state.page_index >= total_pages:
                     st.session_state.page_index = 0
                 page_labels = ["History*", "Pre-OP Lab", "UA", "OP*", "Post-OP Lab", "Pathology"]
                 selected = st.radio(
-                                "페이지 선택", 
+                                "Select Page", 
                                 page_labels,
                                 index=st.session_state.page_index, 
                                 horizontal=True, 
@@ -332,6 +318,7 @@ if st.session_state.page == 'input':
                 )
                 st.session_state.page_index = page_labels.index(selected)
                 st.text("")
+                
                 current_items = pages_data[st.session_state.page_index]
                 for item in current_items:
                     input_type, required = all_items[item]
@@ -412,7 +399,7 @@ if st.session_state.page == 'input':
                             empty_df[key] = value 
                         empty_df = empty_df[~empty_df.index.isna()]
                         empty_df["UA_Bilirubin"] = 0
-                        csv_data = empty_df
+                        csv_data = excel_preprocess(empty_df)
                         st.session_state.csv_data = csv_data
                         st.session_state.input_saved = True
                         csv = csv_data
@@ -432,6 +419,7 @@ if st.session_state.page == 'input':
         st.info("📌 Please upload both image and patient data to proceed.")
 
 
+
 elif st.session_state.page == 'result':
     if 'survival_model' not in st.session_state:
         try:
@@ -445,19 +433,20 @@ elif st.session_state.page == 'result':
     
     file_image = st.session_state.get("file_image") 
     csv_data = st.session_state.get("csv_data")
-
+    ori_df  = st.session_state.get("ori_df")
+    
     if file_image is None:
         st.error("No image found. Please upload an image first.")
         st.stop()
     file_image.seek(0)
     
     survival_model = st.session_state.survival_model
+    summary_lines, fig, back_image_bytes, pre_image_bytes = survival(csv_data, ori_df, file_image, survival_model)
 
-    summary_lines, fig, back_image_bytes, pre_image_bytes = survival(csv_data, file_image, survival_model)
 
+   
     st.session_state.back_image_bytes = back_image_bytes
     st.session_state.pre_image_bytes = pre_image_bytes
-    
     with st.sidebar:
         st.write("")
         st.subheader("📁 Download Processed Images")
@@ -488,11 +477,11 @@ elif st.session_state.page == 'result':
     col1, col2= st.columns([.6, .4])
     with col1:
         st.pyplot(fig)
-
+    
+    
     if st.button("🔙 Back to input"):
         st.session_state.page = 'input'
         st.session_state.file_image = None
-        st.session_state.cls_data = None
         st.session_state.survival_data = None
         st.session_state.input_saved = False
         st.rerun()
