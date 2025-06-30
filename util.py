@@ -85,12 +85,10 @@ def survival(df,ori_df, file, model):
     
     # Load feature columns metadata (placeholder)
     try:
-        # scaler_bundle = joblib.load("./model/scaler.pkl")
-        # feature_columns = scaler_bundle["columns"]
         raise_placeholder_error("model/scaler.pkl")
     except NotImplementedError as e:
         st.warning(str(e))
-        feature_columns = []  # downstream 에서 df_sub = df[feature_columns] 하면 빈 DataFrame
+        feature_columns = [] 
     
     # Build structured DataFrame for scaling (empty if no metadata)
     ori_df.index      = ori_df.index.astype(str).str.strip()
@@ -98,30 +96,32 @@ def survival(df,ori_df, file, model):
     df_sub = df.reindex(columns=feature_columns).astype(float) if feature_columns else pd.DataFrame()
 
     # Load min/max params (placeholder)
-    try:
-        # params = pickle.load(open("./datasets/minmax_params.pkl","rb"))
-        raise_placeholder_error("datasets/minmax_params.pkl")
-    except NotImplementedError as e:
-        st.warning(str(e))
-        data_min = np.zeros(df_sub.shape[1])
-        data_max = np.ones(df_sub.shape[1])
-    
-    
-    # Scale structured inputs
-    if not df_sub.empty:
+    if df_sub.empty:
+        X_test = pd.DataFrame(
+        np.zeros((1, len(feature_columns))), 
+        columns=feature_columns
+        )
+    else:
+        try:
+            raise_placeholder_error("datasets/minmax_params.pkl")
+        except NotImplementedError as e:
+            st.warning(str(e))
+            data_min = np.zeros(df_sub.shape[1])
+            data_max = np.ones(df_sub.shape[1])
         raw_vals = df_sub.values
         denom = data_max - data_min
         denom[denom == 0] = 1
         scaled = (raw_vals - data_min) / denom
-        X_test = pd.DataFrame(scaled, columns=feature_columns, index=df_sub.index)
-    else:
-        X_test = pd.DataFrame(np.zeros((1, len(feature_columns))), columns=feature_columns)
+        X_test = pd.DataFrame(
+            scaled,
+            columns=feature_columns,
+            index=df_sub.index
+            )
         
     # Model inference (placeholder)
     try:
-        # pred = model.predict([X_test, img_batch_item])
         raise_placeholder_error("model weights")
-        pred = np.zeros((1,2), dtype=float)
+        pred = model.predict([X_test, np.expand_dims(img.astype(np.float32)/255.0,0)])
     except NotImplementedError as e:
         st.warning(str(e))
         return None, None, None, None
@@ -135,11 +135,10 @@ def survival(df,ori_df, file, model):
 
     # --- Load common time grid for survival curve (placeholder) ---
     try:
-        # common_time_grid = np.load("./model/common_time_grid.npy")
         raise_placeholder_error("model/common_time_grid.npy")
     except NotImplementedError as e:
         st.warning(str(e))
-        common_time_grid = np.arange(0, 60, 12, dtype=float)
+        common_time_grid = np.arange(0, 60, 1, dtype=float)
     patient_surv = np.exp(- (common_time_grid / beta_)**alpha_)  # shape (M,)
 
     
@@ -205,9 +204,6 @@ def survival(df,ori_df, file, model):
     sigma = (range_max - range_min) / 4  
     pdf = norm.pdf(common_time_grid, loc=mu, scale=sigma)
     pdf = pdf / pdf.max()  
-    
-
-    fig, ax = plt.subplots(figsize=(10, 6))
     
     # Compute recurrence probability curve
     recurrence_prob_curve = 1 - patient_surv  # fraction 0~1
