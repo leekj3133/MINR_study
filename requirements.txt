@@ -13,3 +13,4 @@ keras
 tensorflow == 2.12.0
 streamlit-ext
 openpyxl
+scikit-image
