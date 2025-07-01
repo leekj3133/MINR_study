@@ -1,22 +1,19 @@
 import os
 import cv2
-import base64
-import pickle
 import joblib
-import streamlit as st
-from pathlib import Path
-
+import pickle
+import base64
 import preprocess
+from pathlib import Path
 import numpy as np
 import pandas as pd
 from PIL import Image
+import streamlit as st
+import tensorflow as tf 
 from scipy.stats import norm
 import matplotlib.pyplot as plt
-
-import tensorflow as tf 
 from keras.layers import *
 from keras.models import *
-
 from sklearn.preprocessing import MinMaxScaler
 
 def raise_placeholder_error(filename: str = ""):
@@ -91,8 +88,11 @@ def survival(df,ori_df, file, model):
         feature_columns = [] 
     
     # Build structured DataFrame for scaling (empty if no metadata)
-    ori_df.index      = ori_df.index.astype(str).str.strip()
-    ori_df.columns    = ori_df.columns.str.strip()
+    data_df = ori_df if ori_df is not None else df
+    # Load uploaded CSV
+    data_df.index      = data_df.index.astype(str).str.strip()
+    data_df.columns    = data_df.columns.str.strip()
+    feature_columns    = data_df.columns.tolist()
     df_sub = df.reindex(columns=feature_columns).astype(float) if feature_columns else pd.DataFrame()
 
     # Load min/max params (placeholder)
@@ -144,8 +144,6 @@ def survival(df,ori_df, file, model):
     
     # Load clustering metadata (placeholder)
     try:
-        # with open("./model/kmeans_model.pkl","rb") as f: kmeans = pickle.load(f)
-        # with open("./datasets/risk_group_order.pkl","rb") as f: sorted_idx = pickle.load(f)
         raise_placeholder_error("model/kmeans_model.pkl and datasets/risk_group_order.pkl")
     except NotImplementedError as e:
         st.warning(str(e))
@@ -175,7 +173,6 @@ def survival(df,ori_df, file, model):
         low_risk_threshold  = thr["low"]
     except NotImplementedError as e:
         st.warning(str(e))
-        # 기본 임계값 설정 (예시)
         high_risk_threshold = 0.7
         mid_risk_threshold  = 0.5
         low_risk_threshold  = 0.3
