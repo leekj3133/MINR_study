@@ -144,20 +144,23 @@ if st.session_state.page == 'input':
                 st.write("")
                 # load classifier
                 if file_csv:
-                    try:
-                        selected_data = file_csv
-                        st.session_state.csv_data = selected_data
-                        file_csv.seek(0)
-                        st.session_state.ori_df = pd.read_csv(file_csv, index_col=0)
-                        st.session_state.input_saved = True
-                        st.success("✅ File uploaded successfully.")
-                        st.session_state.csv_path = file_csv
-                        st.write("")
-                        st.write("")
-                        st.write("")
-                        csv = selected_data
-                    except Exception:
-                        st.error("❌ Invalid CSV file. Please check the format.")
+                    # try:
+                    selected_data = excel_preprocess(file_csv)
+                    st.session_state.csv_data = selected_data
+                    
+                    file_csv.seek(0)
+                    ext = file_csv.name.lower().split('.')[-1]
+                    if ext == 'csv':
+                        ori_df = pd.read_csv(file_csv, index_col=0)
+                    else:
+                        ori_df = pd.read_excel(file_csv, index_col=0)
+                    st.session_state.ori_df = ori_df
+
+                    # 3) 성공 메시지
+                    st.session_state.input_saved = True
+                    st.success("✅ File uploaded and preprocessed successfully.")
+                    st.session_state.csv_path = file_csv
+                    csv = selected_data
                 
             elif vertical_alignment == "Enter Text":
                 st.warning("🛠 Text input form to be implemented here.")
