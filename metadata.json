@@ -6,8 +6,8 @@
   ],
   "description": "Sample data and frontend code for recurrence prediction in bladder cancer using the MIBR model.",
   "version": "1.0",
-  "license": "MIT",
-  "keywords": ["bladder cancer", "recurrence prediction", "multimodal AI", "deep learning"],
+  "license": "CC0 1.0",
+  "keywords": ["NMIBC", "recurrence prediction", "multimodal AI", "deep learning","bladder cancer","Survival analysis","Cystoscopy","Clinical decision support"],
   "repository": "https://github.com/leekj3133/MIBR_study",
   "doi": "10.5281/zenodo.16262080"
 }
