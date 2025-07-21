@@ -22,7 +22,7 @@ This version is intended for code structure review and documentation purposes on
 ## Author:
 
 Developer: leekj3133
-GitHub: https://github.com/leekj3133/MIBR_study
+GitHub: https://github.com/leekj3133/MINR_study
 
 ## Code and Data Availability
 
@@ -37,7 +37,7 @@ The recurrence prediction model developed in this study was implemented in **Pyt
   
 - **Source Code (Web Interface & Sample Inference)**  
   The source code for the web-based interface and sample inference logic is publicly available on GitHub:  
-  👉 [https://github.com/leekj3133/MIBR_study](https://github.com/leekj3133/MIBR_study)
+  👉 [https://github.com/leekj3133/MINR_study](https://github.com/leekj3133/MINR_study)
 
 - **Model Weights & Training Code**  
   The full training pipeline, model weights, and backend modules are not publicly released due to institutional and legal restrictions  
