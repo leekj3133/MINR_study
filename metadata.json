@@ -1,0 +1,13 @@
+{
+  "title": "Multimodal Deep Learning for Predicting Recurrence in NMIBC: Comparison with Traditional Risk Models",
+  "authors": [
+    {"name": "JuYoung Lee", "affiliation": "Medical R&D Center, Deepnoid, Inc., Seoul, Republic of Korea"},
+    {"name": "Se Young Choi", "affiliation": "Department of Urology, Chung-Ang University Hospital, Chung-Ang University College of Medicine"}
+  ],
+  "description": "Sample data and frontend code for recurrence prediction in bladder cancer using the MIBR model.",
+  "version": "1.0",
+  "license": "MIT",
+  "keywords": ["bladder cancer", "recurrence prediction", "multimodal AI", "deep learning"],
+  "repository": "https://github.com/leekj3133/MIBR_study",
+  "doi": "10.5281/zenodo.16262080"
+}
