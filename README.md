@@ -56,5 +56,7 @@ This setup ensures transparency while upholding data privacy and ethical researc
   Please cite as:
   JuYoung Lee & Se Young Choi (2025). Multimodal Deep Learning for Predicting Recurrence in NMIBC: Comparison with Traditional Risk Models. Zenodo. https://doi.org/10.5281/zenodo.16262080
 
+- **License**
+This project and its sample data are released under the [CC0 1.0 Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 - **Contact**
   To request access to model weights, full training code, or backend modules (subject to IRB approval), please contact the corresponding author.
