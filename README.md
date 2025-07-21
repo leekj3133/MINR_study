@@ -52,7 +52,6 @@ This setup ensures transparency while upholding data privacy and ethical researc
 
 - **Release & Citation**
   This demonstration is archived under: **DOI 10.5281/zenodo.16262080**
-
   Please cite as:
   JuYoung Lee & Se Young Choi (2025). Multimodal Deep Learning for Predicting Recurrence in NMIBC: Comparison with Traditional Risk Models. Zenodo. https://doi.org/10.5281/zenodo.16262080
 
