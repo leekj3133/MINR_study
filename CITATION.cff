@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it using the following metadata."
-title: "Multimodal Deep Learning for Predicting Recurrence in NMIBC: Comparison with Traditional Risk Models"
+title: "Multimodal Deep Learning for Predicting Recurrence in Non–muscle invasive bladder cancer: Comparison with Traditional Risk Models"
 authors:
   - family-names: Lee
     given-names: JuYoung
