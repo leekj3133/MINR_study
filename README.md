@@ -1,4 +1,4 @@
-# NMIBC AI Tool (DEMO)
+# MIBR: Multimodal NMIBC Recurrence Prediction Demo
 
 
 ## Description:
