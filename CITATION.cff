@@ -5,9 +5,19 @@ authors:
   - family-names: Lee
     given-names: JuYoung
     affiliation: Medical R&D Center, Deepnoid, Inc., Seoul, Republic of Korea.
+  - family-names: Lee
+    given-names: Yong Seong
+    affiliation: Department of Urology, Chung-Ang University Gwangmyeong Hospital, Chung-Ang University College of Medicine, Gyeonggi-do, Republic of Korea.
+  - family-names: Lee
+    given-names: Jae Hyeok
+    affiliation: Medical R&D Center, Deepnoid, Inc., Seoul, Republic of Korea.
+  - family-names: Jung
+    given-names: Gu Cheol
+    affiliation: Medical R&D Center, Deepnoid, Inc., Seoul, Republic of Korea.
   - family-names: Choi
     given-names: Se Young
-    affiliation: Department of Urology, Chung-Ang University Hospital, Chung-Ang University College of Medicine
+    affiliation: Department of Urology, Chung-Ang University Hospital, Chung-Ang University College of Medicine, Seoul, Republic of Korea 
+
 version: "1.0"
 doi: "10.5281/zenodo.16262080"
 date-released: 2025-07-21
